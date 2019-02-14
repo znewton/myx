@@ -4,6 +4,9 @@
   "description": "User Service for myx",
   "main": "index.js",
   "scripts": {
+    "tsc": "tsc",
+    "lint": "tslint",
+    "ci-lint": "tslint src/**/*.ts src/**/*.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
