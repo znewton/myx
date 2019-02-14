@@ -1,0 +1,27 @@
+{
+  "name": "myx-user-service",
+  "version": "0.0.1",
+  "description": "User Service for myx",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/znewton/myx.git"
+  },
+  "keywords": [
+    "node",
+    "typescript",
+    "graphql"
+  ],
+  "author": "znewton <zach@znewton.xyz>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/znewton/myx/issues"
+  },
+  "homepage": "https://github.com/znewton/myx#readme",
+  "devDependencies": {
+    "typescript": "^3.3.3"
+  }
+}
