@@ -30,5 +30,9 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "graphql": "^14.1.1"
   }
 }

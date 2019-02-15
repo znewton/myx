@@ -25,10 +25,17 @@
   },
   "homepage": "https://github.com/znewton/myx#readme",
   "devDependencies": {
+    "@types/express": "^4.16.1",
+    "@types/graphql": "^14.0.7",
     "prettier": "^1.16.4",
+    "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
     "tslint-config-prettier": "^1.18.0",
     "tslint-config-standard": "^8.0.1",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "graphql": "^14.1.1",
+    "prisma-client-lib": "^1.26.6"
   }
 }
