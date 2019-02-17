@@ -14,6 +14,12 @@ npm install
 
 ### `client/`
 
+Compile and run at [localhost:3000](https://localhost:3000)
+
+```
+npm run dev
+```
+
 ### `user-service/`
 
 Make sure you have [Docker](https://docker.com) installed, along with [Docker-Compose](https://docs.docker.com/compose/).
@@ -38,6 +44,8 @@ Deploy the Prisma API
 prisma deploy
 ```
 
+Access the dev server at [localhost:4466](https://localhost:4466)
+
 ### `youtube-service/`
 
 Obtain a [YouTube Data API v3 Key](https://developers.google.com/youtube/registering_an_application) and add to `.env`
@@ -47,4 +55,9 @@ touch .env
 echo "YOUTUBE_API_KEY=your_api_key_here" >> .env
 ```
 
+Run the dev server at [localhost:3366](https://localhost:3366)
+
+```
+npm run dev
+```
 
