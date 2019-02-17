@@ -39,3 +39,12 @@ prisma deploy
 ```
 
 ### `youtube-service/`
+
+Obtain a [YouTube Data API v3 Key](https://developers.google.com/youtube/registering_an_application) and add to `.env`
+
+```
+touch .env
+echo "YOUTUBE_API_KEY=your_api_key_here" >> .env
+```
+
+
