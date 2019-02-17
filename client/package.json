@@ -4,6 +4,12 @@
   "description": "Client module for myx",
   "main": "index.js",
   "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start",
+    "tsc": "tsc",
+    "lint": "tslint",
+    "ci-lint": "tslint src/**/*.ts src/**/*.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +29,20 @@
   },
   "homepage": "https://github.com/znewton/myx#readme",
   "devDependencies": {
+    "@stylable/webpack-plugin": "^1.1.0",
+    "@types/react": "^16.8.3",
+    "@types/react-dom": "^16.8.1",
+    "@zeit/next-typescript": "^1.1.1",
+    "prettier": "^1.16.4",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-react": "^3.6.0",
     "typescript": "^3.3.3"
+  },
+  "dependencies": {
+    "next": "^8.0.1",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1"
   }
 }
