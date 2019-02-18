@@ -4,6 +4,7 @@
   "description": "User Service for myx",
   "main": "index.js",
   "scripts": {
+    "start": "./scripts/serve",
     "tsc": "tsc",
     "lint": "tslint",
     "ci-lint": "tslint src/**/*.ts src/**/*.tsx",

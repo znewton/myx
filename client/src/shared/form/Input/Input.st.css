@@ -1,0 +1,17 @@
+.root {
+}
+
+.label {
+}
+
+.input {
+  font-size: inherit;
+  border: 1px solid #dadadf;
+  background: none;
+  border-radius: 3px;
+  padding: 0.1rem 0.3rem;
+}
+.input:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #1da1f2;
+}

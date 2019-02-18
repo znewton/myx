@@ -14,7 +14,7 @@ npm install
 
 ### `client/`
 
-Compile and run at [localhost:3000](https://localhost:3000)
+Compile and run at [localhost:8080](https://localhost:8080)
 
 ```
 npm run dev
