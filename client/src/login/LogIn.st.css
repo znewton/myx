@@ -1,0 +1,73 @@
+@namespace 'LogIn';
+:import {
+  -st-from: 'shared/form/Input/Input.st.css';
+  -st-default: Input;
+}
+:import {
+  -st-from: 'project.st.css';
+  -st-named: primaryButton, gray7, gray8;
+}
+
+.root {
+  -st-states: loading;
+  width: 100%;
+  height: 100%;
+  background-color: value(gray8);
+  padding-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  overflow: hidden;
+}
+.root::before {
+  content: '';
+  position: absolute;
+  --blur: 3px;
+  top: calc(-1.5 * var(--blur));
+  left: calc(-1.5 * var(--blur));
+  width: calc(100% + calc(3 * var(--blur)));
+  height: calc(100% + calc(3 * var(--blur)));
+  background-image: url('./assets/dj-unsplash.jpg');
+  background-position: center;
+  background-size: cover;
+  filter: saturate(20%) brightness(45%) blur(var(--blur));
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: auto;
+  padding: 3rem;
+  background: white;
+  border-radius: 0.2rem;
+  box-shadow: 0 50px 100px -20px rgba(25, 25, 47, 0.45),
+    0 30px 60px -30px rgba(0, 0, 0, 0.6);
+}
+
+.input {
+  -st-extends: Input;
+  margin-bottom: 1.5rem;
+}
+.input::input {
+  width: 20rem;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid value(gray7);
+  margin-bottom: 1.5rem;
+  font-size: 4rem;
+}
+
+.btnBar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.submitButton {
+  -st-extends: primaryButton;
+  font-weight: 600;
+}

@@ -41,6 +41,17 @@ module.exports = (env, argv) => {
       rules: [
         { test: /\.tsx?$/, loader: 'awesome-typescript-loader' },
         { enforce: 'pre', test: /\.js$/, loader: 'source-map-loader' },
+        {
+          test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'url-loader',
+              options: {
+                limit: 8192,
+              },
+            },
+          ],
+        },
       ],
     },
 
@@ -50,7 +61,6 @@ module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.devServer = {
       port: 5566,
-      contentBase: path.join(__dirname, 'dist'),
       historyApiFallback: {
         index: '/index.html',
         rewrites: [{ from: /\/./, to: '/index.html' }],

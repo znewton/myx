@@ -1,0 +1,9 @@
+@namespace 'Loader';
+
+.root {
+  height: 1em;
+  width: 1em;
+  border-radius: 1em;
+  border: 0.1em solid #dadadf;
+  border-top-color: #8a8a8f;
+}

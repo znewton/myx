@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import './project.st.css';
 import style from './index.st.css';
 
 import { App } from 'app/App';
