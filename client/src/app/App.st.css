@@ -1,0 +1,16 @@
+@namespace 'App';
+
+:import {
+  -st-from: 'project.st.css';
+  -st-named: brandblue;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+  /* vvv Temporary vvv */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10rem;
+}

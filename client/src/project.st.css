@@ -1,7 +1,9 @@
 @namespace 'Project';
 
 :vars {
-  brandblue: #1da1f2;
+  brandblue: #2468ff;
+  brandred: #ff6824;
+
   gray1: #1a1a1f;
   gray2: #3a3a3f;
   gray3: #6a6a6f;
@@ -22,4 +24,5 @@
   -st-extends: Button;
   color: white;
   background: value(brandblue);
+  font-weight: 600;
 }

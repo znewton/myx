@@ -1,11 +1,11 @@
-@namespace 'LogIn';
+@namespace 'Auth';
 :import {
   -st-from: 'shared/form/Input/Input.st.css';
   -st-default: Input;
 }
 :import {
   -st-from: 'project.st.css';
-  -st-named: primaryButton, gray7, gray8;
+  -st-named: primaryButton, brandblue, gray4, gray7, gray8;
 }
 
 .root {
@@ -32,6 +32,9 @@
   background-position: center;
   background-size: cover;
   filter: saturate(20%) brightness(45%) blur(var(--blur));
+}
+
+.root .primaryButton {
 }
 
 .wrapper {
@@ -61,13 +64,30 @@
   font-size: 4rem;
 }
 
-.btnBar {
+.spacedGroup {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 1rem;
 }
+.rightAlignGroup {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+}
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+.rightAlignGroup.flexColumn {
+  align-items: flex-end;
+  justify-content: center;
+}
+.hint {
+  color: value(gray4);
+}
 
-.submitButton {
-  -st-extends: primaryButton;
-  font-weight: 600;
+.link {
+  color: value(brandblue);
 }

@@ -5,8 +5,8 @@ import './project.st.css';
 import style from './index.st.css';
 
 import { App } from 'app/App';
-import { LogIn } from 'login/LogIn';
-import { SignUp } from 'signup/SignUp';
+import { LogIn } from 'auth/login/LogIn';
+import { SignUp } from 'auth/signup/SignUp';
 
 ReactDOM.render(
   <BrowserRouter {...style('root', {}, {})}>
