@@ -1,5 +1,7 @@
 import * as React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import style from '../Auth.st.css';
 
 import { AuthLayout } from 'auth/AuthLayout';
@@ -10,20 +12,47 @@ export const LogIn: React.SFC = props => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [authed, setAuthed] = React.useState(false);
+  const [emailError, setEmailError] = React.useState<string | null>(
+    "This is an email error. It is really really really reallly long and I don't know if it will fit"
+  );
+  const [passwordError, setPasswordError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     document.title = 'myx - Log In';
   });
 
-  function handleAuth() {
+  function resetErrors() {
+    setEmailError(null);
+    setPasswordError(null);
+  }
+
+  async function handleAuth() {
     console.log(email, password);
     setLoading(true);
-    // fake auth check
-    setTimeout(() => {
-      setAuthed(false);
-      setLoading(false);
-    }, 1000);
+
+    try {
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      resetErrors();
+    } catch (authError) {
+      resetErrors();
+      switch (authError.code) {
+        case 'auth/invalid-email':
+          setEmailError('Invalid email address.');
+          break;
+        case 'auth/user-disabled':
+          setEmailError('The user for this email address has been disabled.');
+          break;
+        case 'auth/user-not-found':
+          setEmailError('No user found with this email address.');
+          break;
+        case 'auth/wrong-password':
+          setPasswordError('Incorrect password.');
+          break;
+        default:
+          setEmailError('Something went wrong!');
+          break;
+      }
+    }
   }
 
   return (
@@ -33,6 +62,7 @@ export const LogIn: React.SFC = props => {
         label="Email"
         name="email"
         type="email"
+        error={emailError}
         onUpdate={v => setEmail((v || '').toString())}
       />
       <Input
@@ -40,6 +70,7 @@ export const LogIn: React.SFC = props => {
         label="Password"
         name="password"
         type="password"
+        error={passwordError}
         onUpdate={v => setPassword((v || '').toString())}
       />
       <div className={style.spacedGroup}>
@@ -53,7 +84,6 @@ export const LogIn: React.SFC = props => {
           Log In
         </Button>
       </div>
-      {authed && <Redirect to="/play" />}
     </AuthLayout>
   );
 };

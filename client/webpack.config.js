@@ -2,6 +2,9 @@ const StylableWebpackPlugin = require('@stylable/webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const path = require('path');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 const htmlWebpackPlugin = new HtmlWebpackPlugin({
   template: './public/index.html',
@@ -19,8 +22,9 @@ module.exports = (env, argv) => {
   }
 
   const definePlugin = new webpack.DefinePlugin({
-    USER_SERVICE_URL: userServiceUrl,
-    YOUTUBE_SERVICE_URL: youtubeServiceUrl,
+    USER_SERVICE_URL: JSON.stringify(userServiceUrl),
+    YOUTUBE_SERVICE_URL: JSON.stringify(youtubeServiceUrl),
+    FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
   });
 
   const config = {
@@ -61,6 +65,7 @@ module.exports = (env, argv) => {
   if (argv.mode === 'development') {
     config.devServer = {
       port: 5566,
+      overlay: true,
       historyApiFallback: {
         index: '/index.html',
         rewrites: [{ from: /\/./, to: '/index.html' }],

@@ -8,6 +8,7 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   onUpdate?: InputUpdateHandler;
   label?: string;
+  error?: string | null;
   initialValue?: InputValue;
 }
 
@@ -18,24 +19,32 @@ export interface InputState {
 export const Input: React.SFC<InputProps> = ({
   onUpdate,
   label,
-  initialValue,
+  error,
+  initialValue = '',
   className,
   ...others
 }: InputProps) => {
-  const [value, setValue] = React.useState(initialValue || '');
+  const [value, setValue] = React.useState(initialValue);
 
   React.useEffect(() => {
     if (onUpdate) onUpdate(value);
   });
 
   return (
-    <label {...style('root', { empty: !value }, { className, ...others })}>
+    <label
+      {...style(
+        'root',
+        { empty: !value, error: !!error },
+        { className, ...others }
+      )}
+    >
       <span className={style.label}>{label}</span>
       <input
         className={style.input}
         onChange={e => setValue(e.currentTarget.value)}
         {...others}
       />
+      {!!error && <span className={style.error}>{error}</span>}
     </label>
   );
 };

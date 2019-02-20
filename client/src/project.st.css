@@ -2,7 +2,7 @@
 
 :vars {
   brandblue: #2468ff;
-  brandred: #ff6824;
+  brandred: #ff2312;
 
   gray1: #1a1a1f;
   gray2: #3a3a3f;
@@ -13,7 +13,8 @@
   gray7: #eaeaef;
   gray8: #fafaff;
 
-  outlineshadow: 0 0 0 2px value(brandblue);
+  outlineshadow_focus: 0 0 0 2px value(brandblue);
+  outlineshadow_error: 0 0 0 2px value(brandred);
 }
 :import {
   -st-from: 'shared/Button.st.css';

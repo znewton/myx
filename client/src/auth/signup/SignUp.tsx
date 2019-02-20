@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import style from '../Auth.st.css';
 
 import { AuthLayout } from 'auth/AuthLayout';
@@ -11,7 +11,6 @@ export const SignUp: React.SFC = props => {
   const [password, setPassword] = React.useState('');
   const [confirmedPassword, setConfirmedPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [authed, setAuthed] = React.useState(false);
 
   React.useEffect(() => {
     document.title = 'myx - Sign Up';
@@ -22,7 +21,6 @@ export const SignUp: React.SFC = props => {
     setLoading(true);
     // fake auth check
     setTimeout(() => {
-      setAuthed(false);
       setLoading(false);
     }, 1000);
   }
@@ -57,11 +55,10 @@ export const SignUp: React.SFC = props => {
             Log In
           </Link>
         </div>
-        <Button className={style.submitButton} onClick={handleAuth}>
+        <Button className={style.primaryButton} onClick={handleAuth}>
           Sign Up
         </Button>
       </div>
-      {authed && <Redirect to="/play" />}
     </AuthLayout>
   );
 };

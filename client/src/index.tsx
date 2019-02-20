@@ -1,21 +1,31 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import FirebaseConfig from 'config/firebase.config';
 import './project.st.css';
 import style from './index.st.css';
 
 import { App } from 'app/App';
-import { LogIn } from 'auth/login/LogIn';
-import { SignUp } from 'auth/signup/SignUp';
+
+firebase.initializeApp(FirebaseConfig);
+firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    // signed-in
+    if (!window.location.pathname.match(/^\/play/))
+      window.location.assign('/play');
+  } else if (
+    !window.location.pathname.match(/^\/login/) &&
+    !window.location.pathname.match(/^\/signup/)
+  ) {
+    window.location.assign('/login');
+  }
+});
 
 ReactDOM.render(
   <BrowserRouter {...style('root', {}, {})}>
-    <Switch>
-      <Route path="/play" component={App} />
-      <Route path="/login" component={LogIn} />
-      <Route path="/signup" component={SignUp} />
-      <Redirect from="/" to="/play" />
-    </Switch>
+    <App />
   </BrowserRouter>,
   document.getElementById('root')
 );
