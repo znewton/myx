@@ -7,7 +7,10 @@ export const Play: React.SFC = () => {
   const [user, setUser] = React.useState<firebase.User | null>(null);
 
   React.useEffect(() => {
-    Authenticator.addAuthListener(setUser);
+    const removeAuthListener = Authenticator.addAuthListener(setUser);
+    return () => {
+      removeAuthListener();
+    };
   });
   console.log(user);
   return (

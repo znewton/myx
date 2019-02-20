@@ -31,9 +31,10 @@ class Authenticator {
 
   public addAuthListener(listener: AuthListener) {
     const index = this.authListeners.indexOf(listener);
-    if (index > -1) return;
+    const removeListener = () => this.authListeners.splice(index, 1);
+    if (index > -1) return removeListener;
     this.authListeners.push(listener);
-    return () => this.authListeners.splice(index, 1);
+    return removeListener;
   }
 
   public async signIn(
