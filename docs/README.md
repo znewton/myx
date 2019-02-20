@@ -27,7 +27,7 @@ Compile and run at [localhost:8080](https://localhost:8080)
 npm run dev
 ```
 
-### `user-service/`
+### `data-service/`
 
 Make sure you have [Docker](https://docker.com) installed, along with [Docker-Compose](https://docs.docker.com/compose/).
 

@@ -14,15 +14,15 @@ const htmlWebpackPlugin = new HtmlWebpackPlugin({
 const stylableWebpackPlugin = new StylableWebpackPlugin();
 
 module.exports = (env, argv) => {
-  let userServiceUrl = 'https://localhost:4466';
+  let dataServiceUrl = 'https://localhost:4466';
   let youtubeServiceUrl = 'https://localhost:3366';
   if (argv.mode === 'production') {
-    userServiceUrl = '/user-service';
-    youtubeServiceUrl = '/youtube-service';
+    dataServiceUrl = 'https://myxdata.znewton.xyz';
+    youtubeServiceUrl = 'https://myxyt.znewton.xyz';
   }
 
   const definePlugin = new webpack.DefinePlugin({
-    USER_SERVICE_URL: JSON.stringify(userServiceUrl),
+    DATA_SERVICE_URL: JSON.stringify(dataServiceUrl),
     YOUTUBE_SERVICE_URL: JSON.stringify(youtubeServiceUrl),
     FIREBASE_API_KEY: JSON.stringify(process.env.FIREBASE_API_KEY),
   });
