@@ -1,0 +1,29 @@
+@namespace 'Project';
+
+:vars {
+  brandblue: #2468ff;
+  brandred: #ff2312;
+
+  gray1: #1a1a1f;
+  gray2: #3a3a3f;
+  gray3: #6a6a6f;
+  gray4: #aaaaaf;
+  gray5: #bababf;
+  gray6: #dadadf;
+  gray7: #eaeaef;
+  gray8: #fafaff;
+
+  outlineshadow_focus: 0 0 0 2px value(brandblue);
+  outlineshadow_error: 0 0 0 2px value(brandred);
+}
+:import {
+  -st-from: 'shared/Button.st.css';
+  -st-default: Button;
+}
+
+.primaryButton {
+  -st-extends: Button;
+  color: white;
+  background: value(brandblue);
+  font-weight: 600;
+}

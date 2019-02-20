@@ -1,0 +1,54 @@
+@namespace 'Input';
+
+:vars {
+  shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+  shadow_active: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+
+:import {
+  -st-from: 'project.st.css';
+  -st-named: gray3, brandred, outlineshadow_focus, outlineshadow_error;
+}
+
+.root {
+  display: grid;
+  grid-template-rows: 1.5rem 2rem auto;
+}
+
+.root > * {
+  width: 100%;
+}
+
+.label {
+  font-weight: 600;
+  color: value(gray3);
+}
+
+.input {
+  -st-states: error;
+  font-size: inherit;
+  border: none;
+  background: none;
+  border-radius: 0.2rem;
+  padding: 0.1rem 0.3rem;
+  box-shadow: value(shadow);
+  transition: all 125ms ease;
+}
+.input:hover {
+  transform: translateY(-1px);
+  box-shadow: value(shadow_active);
+}
+.input:error {
+  box-shadow: value(outlineshadow_error), value(shadow);
+}
+.input:focus {
+  transform: translateY(-1px);
+  outline: none;
+  box-shadow: value(outlineshadow_focus), value(shadow_active);
+}
+
+.error {
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  color: value(brandred);
+}

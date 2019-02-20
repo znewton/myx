@@ -14,7 +14,14 @@ npm install
 
 ### `client/`
 
-Compile and run at [localhost:3000](https://localhost:3000)
+Create a firebase project and store the given API Key in `.env`
+
+```
+touch .env
+echo "FIREBASE_API_KEY=your_api_key_here" >> .env
+```
+
+Compile and run at [localhost:8080](https://localhost:8080)
 
 ```
 npm run dev
