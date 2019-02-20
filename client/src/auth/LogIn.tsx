@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import style from '../Auth.st.css';
+import Authenticator, {
+  AuthErrorMessage,
+  AuthErrorType,
+} from 'auth/Authenticator';
+import style from './Auth.st.css';
 
 import { AuthLayout } from 'auth/AuthLayout';
 import { Input } from 'shared/form';
@@ -27,30 +29,25 @@ export const LogIn: React.SFC = props => {
   async function handleAuth() {
     setLoading(true);
 
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      resetErrors();
-    } catch (authError) {
-      resetErrors();
-      switch (authError.code) {
-        case 'auth/invalid-email':
-          setEmailError('Invalid email address.');
+    const authError: AuthErrorMessage | null = await Authenticator.signIn(
+      email,
+      password
+    );
+
+    resetErrors();
+
+    if (authError) {
+      switch (authError.type) {
+        case AuthErrorType.EMAIL:
+          setEmailError(authError.message);
           break;
-        case 'auth/user-disabled':
-          setEmailError('The user for this email address has been disabled.');
-          break;
-        case 'auth/user-not-found':
-          setEmailError('No user found with this email address.');
-          break;
-        case 'auth/wrong-password':
-          setPasswordError('Incorrect password.');
-          break;
-        default:
-          setEmailError('Something went wrong!');
-          console.error(authError.message);
+        case AuthErrorType.PASSWORD:
+          setPasswordError(authError.message);
           break;
       }
     }
+
+    setLoading(false);
   }
 
   return (
