@@ -1,7 +1,7 @@
 {
-  "name": "myx-user-service",
+  "name": "myx-data-service",
   "version": "0.0.1",
-  "description": "User Service for myx",
+  "description": "Data Service for myx",
   "main": "index.js",
   "scripts": {
     "start": "./scripts/serve",
