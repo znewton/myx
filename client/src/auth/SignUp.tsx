@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import firebase from 'firebase/app';
-import 'firebase/auth';
-import style from '../Auth.st.css';
+import Authenticator, {
+  AuthErrorMessage,
+  AuthErrorType,
+} from 'auth/Authenticator';
+import style from './Auth.st.css';
 
 import { AuthLayout } from 'auth/AuthLayout';
 import { Input } from 'shared/form';
@@ -32,31 +34,29 @@ export const SignUp: React.SFC = props => {
   async function handleAuth() {
     setLoading(true);
 
-    if (password !== confirmedPassword) {
-      setConfirmedPasswordError('Must match password.');
-      return;
-    }
-    try {
-      await firebase.auth().createUserWithEmailAndPassword(email, password);
-      resetErrors();
-    } catch (authError) {
-      resetErrors();
-      switch (authError.code) {
-        case 'auth/invalid-email':
-          setEmailError('Invalid email address.');
+    const authError: AuthErrorMessage | null = await Authenticator.signUp(
+      email,
+      password,
+      confirmedPassword
+    );
+
+    resetErrors();
+
+    if (authError) {
+      switch (authError.type) {
+        case AuthErrorType.EMAIL:
+          setEmailError(authError.message);
           break;
-        case 'auth/email-already-in-use':
-          setEmailError('There is an existing user with this email address.');
+        case AuthErrorType.PASSWORD:
+          setPasswordError(authError.message);
           break;
-        case 'auth/weak-password':
-          setPasswordError('Password is too weak.');
-          break;
-        default:
-          setEmailError('Something went wrong!');
-          console.error(authError.message);
+        case AuthErrorType.CONFIRMEDPASSWORD:
+          setConfirmedPasswordError(authError.message);
           break;
       }
     }
+
+    setLoading(false);
   }
 
   return (
