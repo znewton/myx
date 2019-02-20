@@ -2,6 +2,8 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import FirebaseConfig from 'config/firebase.config';
 
+type AuthListener = (user: firebase.User | null) => void;
+
 export enum AuthErrorType {
   EMAIL,
   PASSWORD,
@@ -13,22 +15,25 @@ export interface AuthErrorMessage {
 }
 
 class Authenticator {
+  private authListeners: Array<AuthListener> = [];
+
   public init() {
     firebase.initializeApp(FirebaseConfig);
-    firebase.auth().onAuthStateChanged(this.handleAuthStateChanged);
+    firebase
+      .auth()
+      .onAuthStateChanged(user => this.handleAuthStateChanged(user));
   }
 
   private handleAuthStateChanged(user: firebase.User | null) {
-    if (user) {
-      // signed-in
-      if (!window.location.pathname.match(/^\/play/))
-        window.location.assign('/play');
-    } else if (
-      !window.location.pathname.match(/^\/login/) &&
-      !window.location.pathname.match(/^\/signup/)
-    ) {
-      window.location.assign('/login');
-    }
+    console.log(user, this.authListeners);
+    this.authListeners.forEach(listener => listener(user));
+  }
+
+  public addAuthListener(listener: AuthListener) {
+    const index = this.authListeners.indexOf(listener);
+    if (index > -1) return;
+    this.authListeners.push(listener);
+    return () => this.authListeners.splice(index, 1);
   }
 
   public async signIn(
