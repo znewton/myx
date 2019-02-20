@@ -11,13 +11,12 @@
 }
 
 .root {
-  -st-states: error;
   display: grid;
-  grid-template-rows: 1.5rem 2rem;
+  grid-template-rows: 1.5rem 2rem auto;
 }
 
-.root:error .input {
-  box-shadow: value(outlineshadow_error), value(shadow);
+.root > * {
+  width: 100%;
 }
 
 .label {
@@ -26,6 +25,7 @@
 }
 
 .input {
+  -st-states: error;
   font-size: inherit;
   border: none;
   background: none;
@@ -35,9 +35,11 @@
   transition: all 125ms ease;
 }
 .input:hover {
-  cursor: pointer;
   transform: translateY(-1px);
   box-shadow: value(shadow_active);
+}
+.input:error {
+  box-shadow: value(outlineshadow_error), value(shadow);
 }
 .input:focus {
   transform: translateY(-1px);

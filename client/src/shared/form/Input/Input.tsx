@@ -40,7 +40,7 @@ export const Input: React.SFC<InputProps> = ({
     >
       <span className={style.label}>{label}</span>
       <input
-        className={style.input}
+        {...style('input', { error: !!error })}
         onChange={e => setValue(e.currentTarget.value)}
         {...others}
       />

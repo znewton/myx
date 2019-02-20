@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 import style from '../Auth.st.css';
 
 import { AuthLayout } from 'auth/AuthLayout';
@@ -11,18 +13,50 @@ export const SignUp: React.SFC = props => {
   const [password, setPassword] = React.useState('');
   const [confirmedPassword, setConfirmedPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [emailError, setEmailError] = React.useState<string | null>(null);
+  const [passwordError, setPasswordError] = React.useState<string | null>(null);
+  const [confirmedPasswordError, setConfirmedPasswordError] = React.useState<
+    string | null
+  >(null);
 
   React.useEffect(() => {
     document.title = 'myx - Sign Up';
   });
 
-  function handleAuth() {
-    console.log(email, password, confirmedPassword);
+  function resetErrors() {
+    setEmailError(null);
+    setPasswordError(null);
+    setConfirmedPasswordError(null);
+  }
+
+  async function handleAuth() {
     setLoading(true);
-    // fake auth check
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+
+    if (password !== confirmedPassword) {
+      setConfirmedPasswordError('Must match password.');
+      return;
+    }
+    try {
+      await firebase.auth().createUserWithEmailAndPassword(email, password);
+      resetErrors();
+    } catch (authError) {
+      resetErrors();
+      switch (authError.code) {
+        case 'auth/invalid-email':
+          setEmailError('Invalid email address.');
+          break;
+        case 'auth/email-already-in-use':
+          setEmailError('There is an existing user with this email address.');
+          break;
+        case 'auth/weak-password':
+          setPasswordError('Password is too weak.');
+          break;
+        default:
+          setEmailError('Something went wrong!');
+          console.error(authError.message);
+          break;
+      }
+    }
   }
 
   return (
@@ -32,6 +66,7 @@ export const SignUp: React.SFC = props => {
         label="Email"
         name="email"
         type="email"
+        error={emailError}
         onUpdate={v => setEmail((v || '').toString())}
       />
       <Input
@@ -39,6 +74,7 @@ export const SignUp: React.SFC = props => {
         label="Password"
         name="password"
         type="password"
+        error={passwordError}
         onUpdate={v => setPassword((v || '').toString())}
       />
       <Input
@@ -46,6 +82,7 @@ export const SignUp: React.SFC = props => {
         label="Confirm Password"
         name="confirm_password"
         type="password"
+        error={confirmedPasswordError}
         onUpdate={v => setConfirmedPassword((v || '').toString())}
       />
       <div className={style.spacedGroup}>

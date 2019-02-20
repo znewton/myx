@@ -50,8 +50,6 @@
 .input {
   -st-extends: Input;
   margin-bottom: 1.5rem;
-}
-.input::input {
   width: 20rem;
 }
 

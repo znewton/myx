@@ -12,9 +12,7 @@ export const LogIn: React.SFC = props => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
-  const [emailError, setEmailError] = React.useState<string | null>(
-    "This is an email error. It is really really really reallly long and I don't know if it will fit"
-  );
+  const [emailError, setEmailError] = React.useState<string | null>(null);
   const [passwordError, setPasswordError] = React.useState<string | null>(null);
 
   React.useEffect(() => {
@@ -27,7 +25,6 @@ export const LogIn: React.SFC = props => {
   }
 
   async function handleAuth() {
-    console.log(email, password);
     setLoading(true);
 
     try {
@@ -50,6 +47,7 @@ export const LogIn: React.SFC = props => {
           break;
         default:
           setEmailError('Something went wrong!');
+          console.error(authError.message);
           break;
       }
     }
