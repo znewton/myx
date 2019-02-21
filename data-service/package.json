@@ -5,6 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "ts-node ./src/index.ts",
+    "seed": "ts-node ./src/dev/seed.ts",
+    "wipe": "ts-node ./src/dev/wipe.ts",
     "tsc": "tsc",
     "lint": "tslint",
     "ci-lint": "tslint src/**/*.ts src/**/*.tsx",
