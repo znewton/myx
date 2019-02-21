@@ -4,7 +4,7 @@
   "description": "Data Service for myx",
   "main": "src/index.ts",
   "scripts": {
-    "start": "./scripts/serve",
+    "start": "ts-node ./src/index.ts",
     "tsc": "tsc",
     "lint": "tslint",
     "ci-lint": "tslint src/**/*.ts src/**/*.tsx",
