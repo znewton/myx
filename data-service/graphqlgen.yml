@@ -1,0 +1,7 @@
+language: typescript
+
+schema: ./src/generated/graphql-schema/prisma.graphql
+models:
+  files:
+    - ./src/generated/prisma-client/index.ts
+output: ./src/generated/graphqlgen.ts

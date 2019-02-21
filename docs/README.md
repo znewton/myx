@@ -31,10 +31,10 @@ npm run dev
 
 Make sure you have [Docker](https://docker.com) installed, along with [Docker-Compose](https://docs.docker.com/compose/).
 
-Globally install [Prisma](https://prisma.io).
+Globally install [Prisma](https://prisma.io) and [graphqlgen](https://oss.prisma.io/graphqlgen/).
 
 ```shell
-npm i -g Prisma
+npm i -g prisma graphqlgen
 ```
 
 Start the docker services
@@ -51,7 +51,13 @@ Deploy the Prisma API
 prisma deploy
 ```
 
-Access the dev server at [localhost:4466](https://localhost:4466)
+Access the prisma server at [localhost:4466](https://localhost:4466) (shows as a graphql playground in your browser)
+
+To serve the GraphQL API, run
+
+```shell
+npm run start
+```
 
 ### `youtube-service/`
 
