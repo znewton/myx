@@ -1,13 +1,54 @@
 type User {
   id: ID! @unique
-  email: String @unique
-  name: String!
-  posts: [Post!]!
+  firebaseId: String! @unique
+  email: String! @unique
+  username: String @unique
+  public: Boolean! @default(value: "false")
+  accountType: AccountType! @relation(name: "UsersByAccount")
+  settings: String! @default(value: "{}")
+
+  youTubeMixList: [YouTubeMix!]! @relation(name: "YouTubeMixesByUser")
+  favoritedYouTubeVideoList: [YouTubeVideo!]! @relation(name: "UserFavoriteYouTubeVideos")
+  blockedYouTubeVideoList: [YouTubeVideo!]! @relation(name: "UserBlockedYouTubeVideos")
 }
 
-type Post {
+type YouTubeMix {
   id: ID! @unique
-  title: String!
-  published: Boolean! @default(value: "false")
-  author: User
+  name: String!
+  creator: User! @relation(name: "YouTubeMixesByUser")
+  youTubePlaylistList: [YouTubePlaylist!]! @relation(name: "YouTubePlaylistsInMix")
+  archived: Boolean! @default(value: "false")
+  public: Boolean! @default(value: "false")
+  settings: String! @default(value: "{}")
+}
+
+type YouTubePlaylist {
+  id: ID! @unique
+  creator: YouTubeChannel! @relation(name: "YouTubePlaylistsByChannel")
+  youTubePlaylistId: String! @unique
+  appearsInMixList: [YouTubeMix!]! @relation(name: "YouTubePlaylistsInMix")
+  notableYouTubeVideoList: [YouTubeVideo!]! @relation(name: "NotableYouTubeVideosInPlaylist")
+}
+
+type YouTubeVideo {
+  id: ID! @unique
+  creator: YouTubeChannel! @relation(name: "YouTubeVideosByChannel")
+  youTubeVideoId: String! @unique
+  favoritedByUserList: [User!]! @relation(name: "UserFavoriteYouTubeVideos")
+  blockedByUserList: [User!]! @relation(name: "UserBlockedYouTubeVideos")
+  appearsInPlaylistList: [YouTubePlaylist!]! @relation(name: "NotableYouTubeVideosInPlaylist")
+}
+
+type YouTubeChannel {
+  id: ID! @unique
+  youTubeChannelId: String! @unique
+  videoList: [YouTubeVideo!]! @relation(name: "YouTubeVideosByChannel")
+  playlistList: [YouTubePlaylist!]! @relation(name: "YouTubePlaylistsByChannel")
+}
+
+type AccountType {
+  id: ID! @unique
+  name: String! @unique
+  description: String! @default(value: "")
+  userList: [User!]! @relation(name: "UsersByAccount")
 }
