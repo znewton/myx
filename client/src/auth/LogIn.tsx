@@ -26,7 +26,9 @@ export const LogIn: React.SFC = props => {
     setPasswordError(null);
   }
 
-  async function handleAuth() {
+  async function handleAuth(e: React.FormEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     setLoading(true);
 
     const authError: AuthErrorMessage | null = await Authenticator.signIn(
@@ -52,33 +54,40 @@ export const LogIn: React.SFC = props => {
 
   return (
     <AuthLayout {...style('root', { loading }, props)}>
-      <Input
-        className={style.input}
-        label="Email"
-        name="email"
-        type="email"
-        error={emailError}
-        onUpdate={v => setEmail((v || '').toString())}
-      />
-      <Input
-        className={style.input}
-        label="Password"
-        name="password"
-        type="password"
-        error={passwordError}
-        onUpdate={v => setPassword((v || '').toString())}
-      />
-      <div className={style.spacedGroup}>
-        <div className={style.flexColumn}>
-          <span className={style.hint}>Don't have an account?&nbsp;</span>
-          <Link to="/signup" className={style.link}>
-            Sign Up
-          </Link>
+      <form onSubmit={handleAuth}>
+        <Input
+          className={style.input}
+          label="Email"
+          name="email"
+          type="email"
+          autoFocus={true}
+          error={emailError}
+          onUpdate={v => setEmail((v || '').toString())}
+        />
+        <Input
+          className={style.input}
+          label="Password"
+          name="password"
+          type="password"
+          error={passwordError}
+          onUpdate={v => setPassword((v || '').toString())}
+        />
+        <div className={style.spacedGroup}>
+          <div className={style.flexColumn}>
+            <span className={style.hint}>Don't have an account?&nbsp;</span>
+            <Link to="/signup" className={style.link}>
+              Sign Up
+            </Link>
+          </div>
+          <Button
+            className={style.primaryButton}
+            type="submit"
+            loading={loading}
+          >
+            Log In
+          </Button>
         </div>
-        <Button className={style.primaryButton} onClick={handleAuth}>
-          Log In
-        </Button>
-      </div>
+      </form>
     </AuthLayout>
   );
 };

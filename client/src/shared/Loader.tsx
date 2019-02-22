@@ -1,6 +1,8 @@
 import * as React from 'react';
 import style from './Loader.st.css';
 
-export const Loader: React.SFC = () => {
-  return <div {...style('root', {}, {})} />;
+interface LoaderProps extends React.HTMLAttributes<HTMLSpanElement> {}
+
+export const Loader: React.SFC<LoaderProps> = props => {
+  return <span {...style('root', {}, props)} />;
 };

@@ -31,7 +31,9 @@ export const SignUp: React.SFC = props => {
     setConfirmedPasswordError(null);
   }
 
-  async function handleAuth() {
+  async function handleAuth(e: React.FormEvent) {
+    e.preventDefault();
+    e.stopPropagation();
     setLoading(true);
 
     const authError: AuthErrorMessage | null = await Authenticator.signUp(
@@ -61,41 +63,47 @@ export const SignUp: React.SFC = props => {
 
   return (
     <AuthLayout {...style('root', { loading }, props)}>
-      <Input
-        className={style.input}
-        label="Email"
-        name="email"
-        type="email"
-        error={emailError}
-        onUpdate={v => setEmail((v || '').toString())}
-      />
-      <Input
-        className={style.input}
-        label="Password"
-        name="password"
-        type="password"
-        error={passwordError}
-        onUpdate={v => setPassword((v || '').toString())}
-      />
-      <Input
-        className={style.input}
-        label="Confirm Password"
-        name="confirm_password"
-        type="password"
-        error={confirmedPasswordError}
-        onUpdate={v => setConfirmedPassword((v || '').toString())}
-      />
-      <div className={style.spacedGroup}>
-        <div className={style.flexColumn}>
-          <span className={style.hint}>Already have an account?&nbsp;</span>
-          <Link to="/login" className={style.link}>
-            Log In
-          </Link>
+      <form onSubmit={handleAuth}>
+        <Input
+          className={style.input}
+          label="Email"
+          name="email"
+          type="email"
+          error={emailError}
+          onUpdate={v => setEmail((v || '').toString())}
+        />
+        <Input
+          className={style.input}
+          label="Password"
+          name="password"
+          type="password"
+          error={passwordError}
+          onUpdate={v => setPassword((v || '').toString())}
+        />
+        <Input
+          className={style.input}
+          label="Confirm Password"
+          name="confirm_password"
+          type="password"
+          error={confirmedPasswordError}
+          onUpdate={v => setConfirmedPassword((v || '').toString())}
+        />
+        <div className={style.spacedGroup}>
+          <div className={style.flexColumn}>
+            <span className={style.hint}>Already have an account?&nbsp;</span>
+            <Link to="/login" className={style.link}>
+              Log In
+            </Link>
+          </div>
+          <Button
+            className={style.primaryButton}
+            type="submit"
+            loading={loading}
+          >
+            Sign Up
+          </Button>
         </div>
-        <Button className={style.primaryButton} onClick={handleAuth}>
-          Sign Up
-        </Button>
-      </div>
+      </form>
     </AuthLayout>
   );
 };

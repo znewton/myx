@@ -1,9 +1,48 @@
 @namespace 'Loader';
 
 .root {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+}
+.root::before {
+  content: '';
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  left: 0;
   height: 1em;
   width: 1em;
   border-radius: 1em;
   border: 0.1em solid #dadadf;
   border-top-color: #8a8a8f;
+  --animation: spin 800ms ease-in infinite;
+  -moz-animation: var(--animation);
+  -webkit-animation: var(--animation);
+  animation: var(--animation);
+}
+
+@-moz-keyframes spin {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
