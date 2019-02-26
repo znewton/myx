@@ -19,8 +19,8 @@ export const Play: React.SFC = props => {
   return (
     <div {...style('root', {}, props)}>
       <div className={style.flexRow}>
-        <Sidebar className={style.mixBar} />
-        <Sidebar className={style.queueBar} />
+        <Sidebar title="Mixes" className={style.mixBar} />
+        <Sidebar title="Queue" className={style.queueBar} />
       </div>
       <div className={style.flexColumn}>
         <Header className={style.header} />

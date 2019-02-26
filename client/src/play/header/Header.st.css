@@ -1,4 +1,14 @@
+:import {
+  -st-from: 'project.st.css';
+  -st-named: gray6;
+}
 .root {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+}
+
+.root .logo {
+  font-size: 1.5rem;
 }

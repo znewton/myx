@@ -1,14 +1,6 @@
 :import {
-  -st-from: './header/Header.st.css';
-  -st-default: Header;
-}
-:import {
-  -st-from: './sidebar/Sidebar.st.css';
-  -st-default: Sidebar;
-}
-:import {
-  -st-from: './player/Player.st.css';
-  -st-default: Player;
+  -st-from: 'project.st.css';
+  -st-named: gray5, gray6, gray7;
 }
 
 .root {
@@ -29,14 +21,15 @@
   display: flex;
   flex-direction: row;
 }
-.root .header {
-  -st-extends: Header;
+.root .mixBar {
+  box-shadow: 2px 0 4px 0 rgba(50, 50, 93, 0.1);
 }
-.root .mixBar,
-.root .queueBar {
-  -st-extends: Sidebar;
+.queueBar {
+  border-right: 1px solid value(gray7);
+}
+.header {
+  border-bottom: 1px solid value(gray7);
 }
 .root .player {
-  -st-extends: Player;
   flex-grow: 1;
 }

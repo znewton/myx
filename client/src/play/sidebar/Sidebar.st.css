@@ -1,0 +1,74 @@
+:import {
+  -st-from: 'project.st.css';
+  -st-named: gray5, gray6;
+}
+.root {
+  -st-states: expanded;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.toggle {
+  -st-states: expanded;
+  font: inherit;
+  color: value(gray6);
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem 0.5rem;
+}
+.toggle:expanded {
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.6rem 0.5rem;
+}
+.toggle:hover {
+  cursor: pointer;
+  color: value(gray5);
+}
+
+.toggleArrows {
+  -st-states: expanded;
+  display: block;
+  font-size: 0.85rem;
+  height: 1em;
+  width: 1em;
+  margin: 0.2em;
+}
+.toggleArrows:expanded {
+  order: 1;
+  font-size: 1rem;
+  margin-left: 1em;
+  transform: scaleX(-1);
+}
+
+.toggleArrows::before,
+.toggleArrows::after {
+  content: '';
+  position: absolute;
+  top: 12.5%;
+  display: block;
+  height: 0.75em;
+  width: 0.75em;
+  border-width: 2px 2px 0 0;
+  border-style: solid;
+  transform: rotate(45deg);
+}
+.toggleArrows::before {
+  left: -50%;
+}
+.toggleArrows::after {
+  right: 0;
+}
+.toggleTitle {
+  -st-states: expanded;
+  font-size: 0.85rem;
+}
+.toggleTitle:expanded {
+  margin-left: 0.2rem;
+  font-size: 1rem;
+}
