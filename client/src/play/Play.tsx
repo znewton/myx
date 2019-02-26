@@ -1,9 +1,12 @@
 import * as React from 'react';
+import style from './Play.st.css';
 import Authenticator from 'auth/Authenticator';
 
-import { Button } from 'shared/Button';
+import { Header } from './header/Header';
+import { Sidebar } from './sidebar/Sidebar';
+import { Player } from './player/Player';
 
-export const Play: React.SFC = () => {
+export const Play: React.SFC = props => {
   const [user, setUser] = React.useState<firebase.User | null>(null);
 
   React.useEffect(() => {
@@ -14,8 +17,15 @@ export const Play: React.SFC = () => {
   });
   console.log(user);
   return (
-    <div>
-      <Button onClick={Authenticator.signOut}>Log out</Button>
+    <div {...style('root', {}, props)}>
+      <div className={style.flexRow}>
+        <Sidebar className={style.mixBar} />
+        <Sidebar className={style.queueBar} />
+      </div>
+      <div className={style.flexColumn}>
+        <Header className={style.header} />
+        <Player className={style.player} />
+      </div>
     </div>
   );
 };
