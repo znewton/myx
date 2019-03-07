@@ -1,7 +1,15 @@
 import * as express from 'express';
+import * as cors from 'cors';
+
+import Handler from './handlers/Handler';
+import { TestHandler } from './handlers/test';
 
 class App {
   public express: any;
+  private whitelist: Array<string | RegExp> = [
+    /https?:\/\/localhost.*/,
+    /https:\/\/myx\.znewton\.xyz.*/,
+  ];
 
   constructor() {
     this.express = express();
@@ -10,11 +18,22 @@ class App {
 
   private mountRoutes(): void {
     const router = express.Router();
-    router.get('/', (req, res) => {
-      res.json({
-        message: 'Hello, World!',
-      });
-    });
+
+    new Handler(router).mount();
+    new TestHandler(router).mount();
+
+    const corsOptions = {
+      origin: (origin: string, callback: Function) => {
+        if (!origin || this.whitelist.indexOf(origin) !== -1) {
+          callback(null, true);
+        } else {
+          callback(new Error(`${origin} not allowed by CORS`));
+        }
+      },
+    };
+
+    this.express.options('*', cors(corsOptions));
+    this.express.use(cors(corsOptions));
     this.express.use('/', router);
   }
 }

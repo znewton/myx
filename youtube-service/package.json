@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/znewton/myx#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.4",
     "@types/express": "^4.16.1",
     "@types/jest": "^24.0.5",
     "@types/node": "^11.9.4",
@@ -39,6 +40,7 @@
     "typescript": "^3.3.3"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "ts-node": "^8.0.2"
   }
