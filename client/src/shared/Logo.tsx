@@ -1,7 +1,9 @@
 import * as React from 'react';
 import style from './Logo.st.css';
 
-export const Logo: React.SFC = props => {
+interface LogoProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const Logo: React.SFC<LogoProps> = props => {
   return (
     <div {...style('root', {}, props)}>
       <span className={style.m}>m</span>
