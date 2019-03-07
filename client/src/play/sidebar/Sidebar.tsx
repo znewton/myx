@@ -1,9 +1,11 @@
 import * as React from 'react';
 import style from './Sidebar.st.css';
+import { DefaultItem } from './DefaultItem';
 
 type ListItemRenderer = (
   item: any,
-  props?: { className: string; expanded: boolean }
+  expanded: boolean,
+  props?: { className?: string }
 ) => React.ReactElement;
 
 interface SidebarProps {
@@ -13,11 +15,17 @@ interface SidebarProps {
   listItemRenderer?: ListItemRenderer;
 }
 
+const defaultItemRenderer: ListItemRenderer = (item, expanded, props = {}) => (
+  <DefaultItem key={item} expanded={expanded} {...props}>
+    {item}
+  </DefaultItem>
+);
+
 export const Sidebar: React.SFC<SidebarProps> = ({
   title = '',
   className = '',
-  items = [1, 2, 3],
-  listItemRenderer = item => <li key={item}>{item}</li>,
+  items = [],
+  listItemRenderer = defaultItemRenderer,
 }: SidebarProps) => {
   const [expanded, setExpanded] = React.useState(false);
   return (
@@ -32,9 +40,9 @@ export const Sidebar: React.SFC<SidebarProps> = ({
             <span {...style('toggleTitle', { expanded }, {})}>{title}</span>
           </button>
         </div>
-        <ul className={style.itemList}>
+        <ul {...style('itemList', { expanded }, {})}>
           {items.map(item =>
-            listItemRenderer(item, { expanded, className: style.item })
+            listItemRenderer(item, expanded, { className: style.item })
           )}
         </ul>
       </div>

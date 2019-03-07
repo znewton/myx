@@ -50,20 +50,21 @@
   background: white;
   border: none;
   width: 0;
-  --height: calc(value(headerheight) - 0.5rem);
+  --height: value(headerheight);
   height: var(--height);
   padding: 0;
   padding-left: value(collapsedwidth);
   will-change: padding-left, background-color, border-radius;
   transition: all 125ms ease-in;
 }
-.toggleButton:expanded {
-  padding-left: value(expandedwidth);
-}
 .toggleButton:hover,
 .toggleButton:focus {
   background-color: value(brandblue);
   color: value(gray8);
+  padding-left: calc(value(collapsedwidth) + var(--height));
+}
+.toggleButton:expanded {
+  padding-left: value(expandedwidth);
 }
 .toggleButton:hover {
   cursor: pointer;
@@ -71,11 +72,11 @@
 .toggleButton:focus {
   outline: none;
 }
-.toggleButton:not(:expanded):hover {
+.toggleButton:not(:expanded):hover,
+.toggleButton:not(:expanded):focus {
   --border-radius: calc(value(headerheight) / 2);
   border-top-right-radius: var(--border-radius);
   border-bottom-right-radius: var(--border-radius);
-  padding-left: calc(value(collapsedwidth) + var(--height));
 }
 
 .toggleArrows {
@@ -86,20 +87,16 @@
   justify-content: center;
   position: absolute;
   top: 0;
-  right: calc(calc(value(collapsedwidth) / 2) - calc(var(--height) / 2));
+  right: 0;
   font-size: 0.85rem;
   height: var(--height);
   width: var(--height);
   border-radius: var(--height);
   background-color: inherit;
-  will-change: transform, right;
-  transition: transform 125ms ease-in, right 62ms ease;
-}
-.toggleButton:hover .toggleArrows {
-  right: 0;
+  will-change: transform;
+  transition: transform 125ms ease-in;
 }
 .toggleArrows:expanded {
-  right: 0;
   transform: rotate(180deg);
 }
 .toggleArrows::before,
@@ -128,13 +125,24 @@
   transition: color 125ms ease-in;
 }
 .toggleTitle:expanded,
-.toggleButton:hover .toggleTitle {
+.toggleButton:hover .toggleTitle,
+.toggleButton:focus .toggleTitle {
   color: inherit;
 }
 
 .itemList {
+  -st-states: expanded;
   margin: 0;
-  padding: 0;
+  height: calc(100% - value(headerheight));
+  width: 100%;
+  padding: 0 1rem;
   list-style: none;
-  height: calc(100% - var(--toggleHeight));
+  overflow-y: hidden;
+}
+.itemList:expanded {
+  overflow-y: auto;
+}
+
+.item {
+  width: 100%;
 }
