@@ -1,56 +1,110 @@
+:vars {
+  collapsedwidth: 5rem;
+  expandedwidth: 15rem;
+}
 :import {
   -st-from: 'project.st.css';
-  -st-named: gray5, gray6;
+  -st-named: gray5, gray6, gray8, brandblue;
+}
+:import {
+  -st-from: 'play/header/Header.st.css';
+  -st-named: headerheight;
 }
 .root {
   -st-states: expanded;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  padding-right: value(collapsedwidth);
+  transition: ease-in padding-right 125ms;
+  will-change: padding-right;
+}
+.root:expanded {
+  padding-right: value(expandedwidth);
 }
 
-.toggle {
-  -st-states: expanded;
-  font: inherit;
-  color: value(gray6);
-  background: none;
-  border: none;
+.contentWrapper {
+  position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: 0.3rem 0.5rem;
+  justify-content: flex-start;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
 }
-.toggle:expanded {
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0.6rem 0.5rem;
+
+.toggleWrapper {
+  -st-states: expanded;
+  width: 100%;
+  height: value(headerheight);
 }
-.toggle:hover {
-  cursor: pointer;
+.toggleButton {
+  -st-states: expanded;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font: inherit;
   color: value(gray5);
+  background: white;
+  border: none;
+  width: 0;
+  --height: calc(value(headerheight) - 0.5rem);
+  height: var(--height);
+  padding: 0;
+  padding-left: value(collapsedwidth);
+  will-change: padding-left, background-color, border-radius;
+  transition: all 125ms ease-in;
+}
+.toggleButton:expanded {
+  padding-left: value(expandedwidth);
+}
+.toggleButton:hover,
+.toggleButton:focus {
+  background-color: value(brandblue);
+  color: value(gray8);
+}
+.toggleButton:hover {
+  cursor: pointer;
+}
+.toggleButton:focus {
+  outline: none;
+}
+.toggleButton:not(:expanded):hover {
+  --border-radius: calc(value(headerheight) / 2);
+  border-top-right-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+  padding-left: calc(value(collapsedwidth) + var(--height));
 }
 
 .toggleArrows {
   -st-states: expanded;
-  display: block;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  right: calc(calc(value(collapsedwidth) / 2) - calc(var(--height) / 2));
   font-size: 0.85rem;
-  height: 1em;
-  width: 1em;
-  margin: 0.2em;
+  height: var(--height);
+  width: var(--height);
+  border-radius: var(--height);
+  background-color: inherit;
+  will-change: transform, right;
+  transition: transform 125ms ease-in, right 62ms ease;
+}
+.toggleButton:hover .toggleArrows {
+  right: 0;
 }
 .toggleArrows:expanded {
-  order: 1;
-  font-size: 1rem;
-  margin-left: 1em;
-  transform: scaleX(-1);
+  right: 0;
+  transform: rotate(180deg);
 }
-
 .toggleArrows::before,
 .toggleArrows::after {
   content: '';
-  position: absolute;
-  top: 12.5%;
   display: block;
   height: 0.75em;
   width: 0.75em;
@@ -58,17 +112,29 @@
   border-style: solid;
   transform: rotate(45deg);
 }
-.toggleArrows::before {
-  left: -50%;
-}
-.toggleArrows::after {
-  right: 0;
-}
+
 .toggleTitle {
   -st-states: expanded;
-  font-size: 0.85rem;
+  font-size: 1em;
+  color: transparent;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  display: flex;
+  padding-left: 1em;
+  align-items: center;
+  will-change: color;
+  transition: color 125ms ease-in;
 }
-.toggleTitle:expanded {
-  margin-left: 0.2rem;
-  font-size: 1rem;
+.toggleTitle:expanded,
+.toggleButton:hover .toggleTitle {
+  color: inherit;
+}
+
+.itemList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  height: calc(100% - var(--toggleHeight));
 }

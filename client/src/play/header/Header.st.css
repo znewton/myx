@@ -1,14 +1,20 @@
+:vars {
+  headerheight: 3rem;
+}
+
 :import {
   -st-from: 'project.st.css';
   -st-named: gray6;
 }
 .root {
   display: flex;
-  justify-content: space-between;
+  height: value(headerheight);
+  justify-content: flex-end;
   align-items: center;
   padding: 0.3rem 0.5rem;
 }
 
 .root .logo {
+  display: none;
   font-size: 1.5rem;
 }
