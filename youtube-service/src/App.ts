@@ -3,6 +3,7 @@ import * as cors from 'cors';
 
 import Handler from './handlers/Handler';
 import { TestHandler } from './handlers/TestHandler';
+import ChannelSearch from './handlers/ChannelSearch';
 
 class App {
   public express: any;
@@ -21,6 +22,7 @@ class App {
 
     new Handler(router).mount();
     new TestHandler(router).mount();
+    new ChannelSearch(router).mount();
 
     const corsOptions = {
       origin: (origin: string, callback: Function) => {
