@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as cors from 'cors';
 
 import Handler from './handlers/Handler';
-import { TestHandler } from './handlers/test';
+import { TestHandler } from './handlers/TestHandler';
 
 class App {
   public express: any;

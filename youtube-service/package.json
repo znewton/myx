@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "serve": "node dist/index.js",
-    "dev": "ts-node-dev src/index.ts",
+    "start": "ts-node-dev src/index.ts",
     "lint": "tslint",
     "ci-lint": "tslint src/**/*.ts src/**/*.tsx",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/znewton/myx#readme",
   "devDependencies": {
     "@types/cors": "^2.8.4",
+    "@types/dotenv": "^6.1.0",
     "@types/express": "^4.16.1",
     "@types/jest": "^24.0.5",
     "@types/node": "^11.9.4",
@@ -41,7 +42,9 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "googleapis": "^37.2.0",
     "ts-node": "^8.0.2"
   }
 }

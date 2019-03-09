@@ -71,6 +71,6 @@ echo "YOUTUBE_API_KEY=your_api_key_here" >> .env
 Run the dev server at [localhost:3366](https://localhost:3366)
 
 ```
-npm run dev
+npm run start
 ```
 
